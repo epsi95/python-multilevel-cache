@@ -170,7 +170,8 @@ class CacheLevel(BasecacheLevel):
             if self.next is None:
                 raise e
             else:
-                value = self.next.get(key)
+                next_read_response = self.next.get(key)
+                value = next_read_response.value
                 self.cache_provider.put(key, value)
                 t2 = time.time()
                 return ReadResponse(value, t2-t1)
